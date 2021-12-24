@@ -1,0 +1,24 @@
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'defaultdb.cache' doesn't exist (SQL: select * from `cache` where `key` = toodobe_cachetelescope:dump-watcher limit 1)
+
+  at C:\laragon\www\app-toodobe-backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:671
+    667|         // If an exception occurs when attempting to run a query, we'll format the error
+    668|         // message to include the bindings with SQL, which will make this exception a
+    669|         // lot more helpful to the developer instead of just the database's errors.
+    670|         catch (Exception $e) {
+  > 671|             throw new QueryException(
+    672|                 $query, $this->prepareBindings($bindings), $e
+    673|             );
+    674|         }
+    675|
+
+  • A table was not found: You might have forgotten to run your migrations. You can run your migrations using `php artisan migrate`. 
+    https://laravel.com/docs/master/migrations#running-migrations
+
+  1   [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(Laravel\Telescope\TelescopeServiceProvider))
+
+  2   C:\laragon\www\app-toodobe-backend\vendor\doctrine\dbal\lib\Doctrine\DBAL\Driver\PDOConnection.php:66
+      Doctrine\DBAL\Driver\PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'defaultdb.cache' doesn't exist")

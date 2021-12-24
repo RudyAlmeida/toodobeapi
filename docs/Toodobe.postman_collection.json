@@ -1,0 +1,2181 @@
+{
+	"info": {
+		"_postman_id": "bd2ff72d-82a5-40ba-8184-992a8ffa88a5",
+		"name": "Toodobe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "password-reset",
+					"item": [
+						{
+							"name": "create password reset token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"carvalho.thiego@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/password-reset/create",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"password-reset",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"carvalho.thiego@gmail.com\",\n\t\"password\": \"123456\",\n\t\"password_confirmation\": \"123456\",\n\t\"token\": \"{{reset-token}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/password-reset/reset",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"password-reset",
+										"reset"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "validate reset token",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/password-reset/find/{{reset-token}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"password-reset",
+										"find",
+										"{{reset-token}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"carvalho.thiego@gmail.com\",\n\t\"password\": \"c@my2005\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Thiego Carvalho\",\n    \"email\": \"thiego@rocketmail.com\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\",\n    \"affiliate_code\": \"teste\",\n    \"affiliate_type\": \"afiliado\",\n    \"mobile\": \"(11)98803-8876\",\n    \"registry_code\": \"483.030.220-83\",\n    \"birthday\": \"1988/06/07\",\n    \"address_city\": \"São Paulo\",\n    \"address_state\": \"SP\",\n    \"address_country\": \"BR\", \n    \"property_values_id\": 1\n},",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify-email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Thiego Carvalho\",\n\t\"email\":\"carvalho.thiego@live.com\",\n\t\"password\": \"123456\",\n\t\"password_confirmation\": \"123456\",\n\t\"affiliate_code\":\"teste\",\n\t\"mobile\":\"(11)98803-8876\",\n\t\"registry_code\": \"405.558.560-89\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/verify-email/{{verify-email-token}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"verify-email",
+								"{{verify-email-token}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resend-verification-email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Thiego Carvalho\",\n\t\"email\":\"carvalho.thiego@live.com\",\n\t\"password\": \"123456\",\n\t\"password_confirmation\": \"123456\",\n\t\"affiliate_code\":\"teste\",\n\t\"mobile\":\"(11)98803-8876\",\n\t\"registry_code\": \"405.558.560-89\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/resend-verification-email/{{email}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resend-verification-email",
+								"{{email}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/dashboard",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Registration Form",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/registration-form/list?search=natan",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"registration-form",
+								"list"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "natan"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/registration-form/{{registration-form-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"registration-form",
+								"{{registration-form-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/registration-form/destroy/{{registration-form-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"registration-form",
+								"destroy",
+								"{{registration-form-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"registration_form_type\": \"conjuge\",\n    \"user_id\": 1,\n    \"name\":\"Camila Silva Alves\",\n    \"address_zipcode\": \"06120-080\",\n    \"address_type\": \"alugada\",\n    \"address_street\": \"Rua Tilia\",\n    \"address_number\": \"149\",\n    \"address_complement\": \"Casa 2\",\n    \"address_neighborhood\": \"Jardim Das Flores\",\n    \"address_city\": \"Osasco\",\n    \"address_state\": \"SP\",\n    \"address_dwelling_time\": \"1\",\n    \"phone\": \"(11)3682-3351\",\n    \"marital_status\": \"viuvo(a)\",\n    \"birthday\": \"1988/06/13\",\n    \"citizenship\": \"brasileiro\",\n    \"hometown\": \"Osasco\",\n    \"mothers_name\": \"Silvia Elena Carvalho\",\n    \"fathers_name\": \"Manoel Clementino Nascimento Filho\",\n    \"professional_category\": \"Profissional Liberal\",\n    \"profession\": \"Engenheiro de Software\",\n    \"proven_income\": \"12000.00\",\n    \"pis\": \"170.33259.50-4\",\n    \"fgts_value\": \"200000.00\",\n    \"employed\": true,\n    \"company_name\": \"Eleven Financial Research | Investimentos Financeiros\",\n    \"company_admission_date\": \"2019/07/18\",\n    \"declaring_ir\": true,\n    \"education_level\": \"mba\",\n    \"educational_institution\": \"FIAP\",\n    \"course\": \"Engenharia de Software\",\n    \"conclusion_year\": \"2014\",\n    \"has_vehicle\": true,\n    \"vehicle_manufacturer\": \"Frod\",\n    \"vehicle_model\": \"Fiesta\",\n    \"vehicle_year\": \"2016\",\n    \"own_property\": false,\n    \"property_value\": \"0\",\n    \"businessman\": true,\n    \"businessman_name\": \"Thiego Carvalho Nascimento MEI \",\n    \"businessman_cnpj\": \"60.803.204/0001-92\",\n    \"approximate_billing\": \"1000000.00\",\n    \"height\": \"1,80\",\n    \"weight\": \"89\",\n    \"personal_references\": [\n        {\n            \"name\": \"Fulano da Silva\",\n            \"phone\": \"(11)98888-8888\"\n        },\n         {\n            \"name\": \"Beltrano da Silva\",\n            \"phone\": \"(11)99999-9999\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/registration-form/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"registration-form",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n    \"id\": {{registration-form-id}},\n    \"registration_form_type\": \"conjuge\",\n    \"user_id\": 1,\n    \"name\":\"Camila Silva Alves\",\n    \"address_zipcode\": \"06120-080\",\n    \"address_type\": \"alugada\",\n    \"address_street\": \"Rua Tilia\",\n    \"address_number\": \"149\",\n    \"address_complement\": \"Casa 2\",\n    \"address_neighborhood\": \"Jardim Das Flores\",\n    \"address_city\": \"Osasco\",\n    \"address_state\": \"SP\",\n    \"address_dwelling_time\": \"1\",\n    \"phone\": \"(11)3682-3351\",\n    \"marital_status\": \"viuvo(a)\",\n    \"birthday\": \"1988/06/13\",\n    \"citizenship\": \"brasileiro\",\n    \"hometown\": \"Osasco\",\n    \"mothers_name\": \"Silvia Elena Carvalho\",\n    \"fathers_name\": \"Manoel Clementino Nascimento Filho\",\n    \"professional_category\": \"Profissional Liberal\",\n    \"profession\": \"Engenheiro de Software\",\n    \"proven_income\": \"12000.00\",\n    \"pis\": \"170.33259.50-4\",\n    \"fgts_value\": \"200000.00\",\n    \"employed\": true,\n    \"company_name\": \"Eleven Financial Research | Investimentos Financeiros\",\n    \"company_admission_date\": \"2019/07/18\",\n    \"declaring_ir\": true,\n    \"education_level\": \"mba\",\n    \"educational_institution\": \"FIAP\",\n    \"course\": \"Engenharia de Software\",\n    \"conclusion_year\": \"2014\",\n    \"has_vehicle\": true,\n    \"vehicle_manufacturer\": \"Frod\",\n    \"vehicle_model\": \"Fiesta\",\n    \"vehicle_year\": \"2016\",\n    \"own_property\": false,\n    \"property_value\": \"0\",\n    \"businessman\": true,\n    \"businessman_name\": \"Thiego Carvalho Nascimento MEI \",\n    \"businessman_cnpj\": \"60.803.204/0001-92\",\n    \"approximate_billing\": \"1000000.00\",\n    \"height\": \"1,80\",\n    \"weight\": \"89\",\n    \"personal_references\": [\n        {\n            \"name\": \"Fulano da Silva\",\n            \"phone\": \"(11)98888-8888\"\n        },\n         {\n            \"name\": \"Beltrano da Silva\",\n            \"phone\": \"(11)99999-9999\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/registration-form/update/{{registration-form-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"registration-form",
+								"update",
+								"{{registration-form-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/projects/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"projects",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/projects/{{project-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"projects",
+								"{{project-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/projects/destroy/{{project-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"projects",
+								"destroy",
+								"{{project-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"user_id\": 1,\r\n\t\"project_desciption\": \"Mansão no Morumbi\",\r\n\t\"project_value\": \"700000.00\",\r\n\t\"property_type\": [\"Casa\", \"Apartamento\"],\r\n\t\"bedrooms\": 5,\r\n\t\"parking_spaces\": 5,\r\n\t\"leisure_sport\": [\"Jardim\", \"Piscina\"],\r\n\t\"amenities_services\": [\"Aquecimento\", \"Ar-condicionado\"],\r\n\t\"safety\": [\"Circuito de segurança\", \"Condomínio fechado\"],\r\n\t\"rooms\": [\"Varanda gourmet\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/projects/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"projects",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : {{project-id}},\n    \"user_id\": 1,\n    \"registration_form_id\": 1,\n    \"project_desciption\": \"Mansão no Morumbi\",\n    \"project_value\": \"30000000.00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/projects/update/{{project-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"projects",
+								"update",
+								"{{project-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Properties",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/properties/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"properties",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/properties/{{property-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"properties",
+								"{{property-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/properties/destroy/{{property-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"properties",
+								"destroy",
+								"{{property-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"property_value\": 1000000.00,\r\n\t\"first_installment\": 10600.66,\r\n\t\"last_installment\": 2885.66,\r\n\t\"income_value\": 35335.53\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/properties/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"properties",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : {{property-id}},\n\t\"property_value\": 1000000.00,\n\t\"first_installment\": 10600.66,\n\t\"last_installment\": 2885.66,\n\t\"income_value\": 35335.53\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/properties/update/{{property-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"properties",
+								"update",
+								"{{property-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Billings",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/billings/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"billings",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/billings/{{billing-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"billings",
+								"{{billing-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/billings/destroy/{{billing-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"billings",
+								"destroy",
+								"{{billing-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"user_id\": 1,\r\n\t\"description\": \"Descrição da Cobrança\",\r\n\t\"value\": \"1000.00\",\r\n\t\"billing_type\": \"BOLETO\",\r\n\t\"due_date\": \"2020/06/15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/billings/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"billings",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\" : {{billing-id}},\r\n\t\"user_id\": 1,\r\n\t\"description\": \"Descrição da Cobrança loucura2 \",\r\n\t\"value\": \"500.00\",\r\n\t\"billing_type\": \"BOLETO\",\r\n\t\"due_date\": \"2020/06/15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/billings/update/{{billing-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"billings",
+								"update",
+								"{{billing-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/subscriptions/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscriptions",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/subscriptions/{{subscription-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscription-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/subscriptions/destroy/{{subscription-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscriptions",
+								"destroy",
+								"{{subscription-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"user_id\": 1,\r\n\t\"description\": \"Descrição da Assinatura\",\r\n\t\"value\": \"1000.00\",\r\n\t\"billing_type\": \"BOLETO\",\r\n\t\"next_due_date\": \"2020/06/15\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/subscriptions/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscriptions",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\" : {{subscription-id}},\r\n\t\"user_id\": 1,\r\n\t\"description\": \"Descrição da Cobrança loucura2 \",\r\n\t\"value\": \"500.00\",\r\n\t\"billing_type\": \"BOLETO\",\r\n\t\"next_due_date\": \"2020/06/15\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/subscriptions/update/{{subscription-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscriptions",
+								"update",
+								"{{subscription-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Bank Information",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bank/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bank",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bank/{{bank-iinformation-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bank",
+								"{{bank-iinformation-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bank/destroy/{{bank-iinformation-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bank",
+								"destroy",
+								"{{bank-iinformation-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"for_commissions\": false,\n    \"account_name\": \"Conta do Banco Neon\",\n    \"bank_account_type\": \"CONTA_CORRENTE\",\n    \"owner_name\": \"Thiego Carvalho Nascimento\",\n    \"owner_birth_date\": \"07/06/1988\",\n    \"registry_code\": \"366.320.088-44\",\n    \"bank_code\": \"0677\",\n    \"agency\": \"0001\",\n    \"account\": \"0612149\",\n    \"account_digit\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/bank/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bank",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":{{bank-iinformation-id}},\n    \"user_id\": 1,\n    \"for_commissions\":true,\n    \"account_name\": \"Conta do Banco Neon\",\n    \"bank_account_type\": \"CONTA_CORRENTE\",\n    \"owner_name\": \"Thiego Carvalho Nascimento\",\n    \"owner_birth_date\": \"07/06/1988\",\n    \"registry_code\": \"366.320.088-44\",\n    \"bank_code\": \"0677\",\n    \"agency\": \"0001\",\n    \"account\":\"0612149\",\n    \"account_digit\":\"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/bank/update/{{bank-iinformation-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bank",
+								"update",
+								"{{bank-iinformation-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Marketing",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/marketing/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"marketing",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Thiego Carvalho",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "carvalho.thiego@live.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "(11)98803-8876",
+									"type": "text"
+								},
+								{
+									"key": "registry_code",
+									"value": "405.558.560-89",
+									"type": "text"
+								},
+								{
+									"key": "birthday",
+									"value": "1988/06/18",
+									"type": "text"
+								},
+								{
+									"key": "address_city",
+									"value": "São Paulo",
+									"type": "text"
+								},
+								{
+									"key": "address_state",
+									"value": "SP",
+									"type": "text"
+								},
+								{
+									"key": "address_country",
+									"value": "BR",
+									"type": "text"
+								},
+								{
+									"key": "user_image",
+									"type": "file",
+									"src": "/C:/Users/zigfried/Downloads/92422057_1640266892789382_8056297966467547136_n.jpg"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/profile/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Documents Requests",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/documents-request/list?search=natan",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents-request",
+								"list"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "natan"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/documents-request/{{registration-form-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents-request",
+								"{{registration-form-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/documents-request/destroy/{{registration-form-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents-request",
+								"destroy",
+								"{{registration-form-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "document_name",
+									"value": "RG",
+									"type": "text"
+								},
+								{
+									"key": "document_status",
+									"value": "enviado",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/documents-request/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents-request",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "document_name",
+									"value": "RG",
+									"type": "text"
+								},
+								{
+									"key": "document_status",
+									"value": "enviado",
+									"type": "text"
+								},
+								{
+									"key": "user_file",
+									"type": "file",
+									"src": "/C:/Users/zigfried/Desktop/identidade-digital.jpg"
+								},
+								{
+									"key": "id",
+									"value": "{{documents-request-id}}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/documents-request/update/{{documents-request-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents-request",
+								"update",
+								"{{documents-request-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Invites",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/invite/list?search=natan",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invite",
+								"list"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "natan"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/invite/destroy/{{invite-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invite",
+								"destroy",
+								"{{invite-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Thiego Carvalho\",\n    \"user_id\": \"1\",\n    \"email\": \"thiego@icloud.com\",\n    \"mobile\": \"(11)98803-8876\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invite/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invite",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/users/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"list"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "natan",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/users/{{user-id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"{{user-id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/users/destroy/{{user-id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"destroy",
+										"{{user-id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Thiego Carvalho",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "carvalho.thiego@live.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "mobile",
+											"value": "(11)98803-8876",
+											"type": "text"
+										},
+										{
+											"key": "registry_code",
+											"value": "405.558.560-89",
+											"type": "text"
+										},
+										{
+											"key": "birthday",
+											"value": "1988/07/18",
+											"type": "text"
+										},
+										{
+											"key": "address_city",
+											"value": "São Paulo",
+											"type": "text"
+										},
+										{
+											"key": "address_state",
+											"value": "SP",
+											"type": "text"
+										},
+										{
+											"key": "address_country",
+											"value": "BR",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "user_image",
+											"type": "file",
+											"src": "/C:/Users/zigfried/Downloads/92422057_1640266892789382_8056297966467547136_n.jpg"
+										},
+										{
+											"key": "affiliate_code",
+											"value": "toodobe",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/users/create",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Thiego Carvalho",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "carvalho.thiego@live.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "mobile",
+											"value": "(11)98803-8876",
+											"type": "text"
+										},
+										{
+											"key": "registry_code",
+											"value": "405.558.560-89",
+											"type": "text"
+										},
+										{
+											"key": "birthday",
+											"value": "1988/07/18",
+											"type": "text"
+										},
+										{
+											"key": "address_city",
+											"value": "São Paulo",
+											"type": "text"
+										},
+										{
+											"key": "address_state",
+											"value": "SP",
+											"type": "text"
+										},
+										{
+											"key": "address_country",
+											"value": "BR",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "customer",
+											"type": "text"
+										},
+										{
+											"key": "affiliate_code",
+											"value": "toodobe",
+											"type": "text"
+										},
+										{
+											"key": "user_file",
+											"type": "file",
+											"src": "/C:/Users/zigfried/Desktop/identidade-digital.jpg"
+										},
+										{
+											"key": "id",
+											"value": "{{user-id}}",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/users/update/{{user-id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"update",
+										"{{user-id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Teste",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth-token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0e661742-bc98-4198-9943-eda6974f0528",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0ba3f88a-cf4e-4268-ba32-8e00585ebafe",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "be4483bb-5866-468f-a15c-9537d837b7b0",
+			"key": "url",
+			"value": "app-toodobe-backend.test",
+			"type": "string"
+		},
+		{
+			"id": "f98d94e5-9cc7-44d6-926c-a9a7d6856af1",
+			"key": "reset-token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kZXYtdG9vZG9iZS1hcGkuZWxldmVuZmluYW5jaWFsLmNvbS5iclwvbG9naW4iLCJpYXQiOjE1ODYyMTg5ODUsImV4cCI6MTYxNzc1NDk4NSwibmJmIjoxNTg2MjE4OTg1LCJqdGkiOiJYWWNwY3hwajBIOXFLcUJiIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.MniBc36iX3qgYE-NilOh_d7I_xHOcZY2kKp5Trh5ku0",
+			"type": "string"
+		},
+		{
+			"id": "3e4d8e09-0ff6-40a8-a6ab-c6fb4b4e7ef1",
+			"key": "auth-token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcHAtdG9vZG9iZS1iYWNrZW5kLnRlc3RcL2xvZ2luIiwiaWF0IjoxNTg3Njg4NzMzLCJleHAiOjE2MTkyMjQ3MzMsIm5iZiI6MTU4NzY4ODczMywianRpIjoiWUxuM3VUNnJ4Y2ZjclRYSyIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.UiTOszSQIAdeiujEHaMGANVRxYFky983rYKJBT9m8tE",
+			"type": "string"
+		},
+		{
+			"id": "684a1749-c476-42bc-bba0-51dafd676b90",
+			"key": "verify-email-token",
+			"value": "xU9AYVS0zTJFgtxNqKxRqllM28UjBG8eoVkLCWor0gM5wR14WrZFNNt99bwq",
+			"type": "string"
+		},
+		{
+			"id": "d3dbeba8-5369-4daf-95cf-cce3f381aed3",
+			"key": "email",
+			"value": "carvalho.thiego@gmail.com",
+			"type": "string"
+		},
+		{
+			"id": "c4c03bfd-a3cf-487e-9dd2-e2a553ec87ac",
+			"key": "registration-form-id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "65cb6a2a-3c9c-4fcd-81bd-c34f7f23870a",
+			"key": "project-id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "5df1feeb-f7c7-4b7f-900a-91140bb458d3",
+			"key": "bank-iinformation-id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "91c5600b-3f79-454d-a1c9-e1520c4ed1d4",
+			"key": "marketing-file-id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "50ad5ec0-83d0-4f1a-a19c-8d8b8d1c0375",
+			"key": "documents-request-id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "c9e90824-061c-4c15-be41-e244bce9a668",
+			"key": "user-id",
+			"value": "5",
+			"type": "string"
+		},
+		{
+			"id": "0115df3e-c253-4be4-b4c7-1fe3913d8013",
+			"key": "invite-id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "424a2139-73fb-45c7-af58-43ca77eaccd8",
+			"key": "billing-id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "a7eb91f3-232f-45a1-aac4-e2a642282409",
+			"key": "subscription-id",
+			"value": "4",
+			"type": "string"
+		},
+		{
+			"id": "1eb670bb-b3dc-48fb-991c-f582e0db61f9",
+			"key": "property-id",
+			"value": "1",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
